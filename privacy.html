@@ -97,16 +97,19 @@
     <p>
         The App works <strong>without a password login</strong>.
         We do not ask for your real legal name, email address, or phone number to use the App.
-        On first launch we still create a lightweight App profile so we can apply usage limits and restore purchases.
+        When you continue past onboarding, we create a lightweight App profile so we can apply usage limits
+        and restore purchases.
     </p>
 
     <h3>2.1. Anonymous Identifiers &amp; App Profile</h3>
     <p>To operate the App, quotas, and purchases, we use:</p>
     <ul>
-        <li>An <strong>anonymous device identifier</strong> stored securely in the iPhone Keychain and sent at
-            first launch so we can create your App profile.</li>
-        <li>An <strong>8-digit public ID</strong> shown in Profile (for support). This is not your phone number.</li>
-        <li>An optional <strong>nickname</strong> and optional <strong>avatar</strong> you choose in Profile.</li>
+        <li>An <strong>anonymous device identifier</strong> stored securely in the iPhone Keychain
+            and also stored on our servers to operate your App profile.</li>
+        <li>An <strong>8-digit public ID</strong> shown in Profile (for support) and stored on our servers.
+            This is not your phone number.</li>
+        <li>An optional <strong>nickname</strong> stored on this iPhone and on our servers, and an optional
+            <strong>avatar</strong> kept as a local profile choice.</li>
         <li>A matching <strong>RevenueCat App User ID</strong> (the same anonymous device identifier), used to
             link purchases to your device / App Store account.</li>
         <li>Standard <strong>Apple in-app purchase identifiers</strong> (product identifiers and transaction
@@ -148,6 +151,8 @@
         OpenAI is used only to produce that report. We do not use your screenshots or conversation content
         to train our own models, to show ads, or to identify people in the chat.
         We do not opt in to use API inputs to train OpenAI models.
+        We send analysis requests with OpenAI’s <code>store</code> flag disabled so OpenAI does not keep
+        Responses API application state for later retrieval.
     </p>
     <p>
         If the images are not a readable chat (for example, nature photos), OpenAI may still receive them
@@ -170,24 +175,27 @@
         are not stored in our database.
     </p>
     <p>
-        <strong>OpenAI is a separate processor.</strong> OpenAI may retain API inputs and outputs for a limited
-        period under OpenAI’s own terms and
+        <strong>OpenAI is a separate processor.</strong> Even with <code>store</code> disabled, OpenAI may
+        retain API inputs and outputs for a limited period (typically up to 30 days) under OpenAI’s own terms and
         <a href="https://openai.com/policies/api-data-usage-policies" rel="noopener">API data usage policies</a>
-        (for example, abuse monitoring). We do not control OpenAI’s retention schedule.
+        (for example, abuse monitoring). We do not control that schedule.
+        OpenAI API data is not used to train OpenAI models by default unless the API customer opts in.
         See also OpenAI’s <a href="https://openai.com/policies/privacy-policy" rel="noopener">Privacy Policy</a>.
     </p>
 
     <h3>2.5. What Stays on Your iPhone</h3>
     <p>
         The generated report and your analysis history are saved <strong>on this device only</strong>.
-        Uninstalling the App removes that local history. We cannot recover a deleted on-device report.
+        Uninstalling the App removes that local history (app files). The Keychain identifier may remain on
+        the device until you use Delete Account or until iOS removes it. We cannot recover a deleted on-device report.
     </p>
 
     <h3>2.6. Account Metadata Stored on Our Servers</h3>
     <p>To run the App we store limited metadata, for example:</p>
     <ul>
         <li>device identifier, public ID, nickname, optional avatar;</li>
-        <li>approximate country / region inferred from standard request headers (not GPS or precise location);</li>
+        <li>approximate country / region inferred from standard request headers and device locale
+            (not GPS, not precise location; we do not store your IP address);</li>
         <li>app version and platform (iOS);</li>
         <li>usage counters (for example, whether the free analysis was used, analyses today);</li>
         <li>a premium cache based on RevenueCat / Apple;</li>
@@ -310,7 +318,8 @@
     <ul>
         <li>Screenshots, OCR, extra context, and full reports are <strong>not retained on DeepSearch servers</strong>
             after processing.</li>
-        <li>OpenAI may retain API inputs/outputs for a limited time under OpenAI’s policies.</li>
+        <li>OpenAI may retain API inputs/outputs for a limited time (typically up to 30 days) under OpenAI’s policies,
+            even when we disable Responses API storage.</li>
         <li>On-device reports remain until you delete the App, delete your account in Profile, or clear that local history.</li>
         <li>Account metadata, usage counters, analytics events, and purchase/entitlement records are kept as needed
             to provide the App and meet legal/accounting obligations, or until you request deletion.</li>
@@ -334,7 +343,9 @@
         <li>the RevenueCat subscriber record we can delete for that anonymous ID, when available.</li>
     </ul>
     <p>
-        The App then creates a <strong>new anonymous ID</strong>. This cannot be undone.
+        After deletion, the App returns you to onboarding and clears the local Keychain identifier.
+        A <strong>new server profile is created only if you continue using the App</strong>.
+        This cannot be undone.
         You may also email <a href="mailto:ilushazs@icloud.com">ilushazs@icloud.com</a>
         with your 8-digit public ID if you cannot use the in-app control.
     </p>
@@ -345,8 +356,8 @@
         <li>data already processed and retained by OpenAI under OpenAI’s policies.</li>
     </ul>
     <p>
-        If you still have Premium after deletion, use <strong>Restore Purchases</strong> to attach it
-        to the new profile.
+        If you still have Premium after deletion, use <strong>Restore Purchases</strong> after you continue
+        so Apple can attach it to the new profile.
     </p>
 
     <h2>10. Data Security</h2>
